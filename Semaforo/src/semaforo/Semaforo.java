@@ -19,11 +19,14 @@ public class Semaforo extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLSemaforo.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        
+        scene.getStylesheets().add(Semaforo.class.getResource("styles.css").toExternalForm());
+        
         stage.show();
     }
 
