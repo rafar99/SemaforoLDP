@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -10,16 +11,29 @@
 
 <AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="semaforo.FXMLDocumentController">
     <children>
-      <Pane layoutY="4.0" prefHeight="768.0" prefWidth="1280.0" style="-fx-background-color: #f4f2ef;">
+      <Pane fx:id="p_menu" prefHeight="768.0" prefWidth="1280.0">
+         <children>
+            <ImageView fitHeight="772.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/menu.png" />
+               </image>
+            </ImageView>
+            <Button id="btn_comecar" fx:id="btn_comecar" layoutX="496.0" layoutY="328.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="289.0" text="Começar">
+               <font>
+                  <Font name="Showcard Gothic" size="40.0" />
+               </font></Button>
+         </children>
+      </Pane>
+      <Pane fx:id="p_jogo" layoutY="4.0" prefHeight="768.0" prefWidth="1280.0" style="-fx-background-color: #f4f2ef;" visible="false">
          <children>
             <Pane id="tabuleiro" layoutX="52.0" layoutY="127.0" prefHeight="572.0" prefWidth="1188.0" style="-fx-background-color: #d6a870;">
                <children>
-                    <Label fx:id="label" layoutX="467.0" layoutY="38.0" minHeight="16" minWidth="69" text="Semáforo" textFill="#4f4e4a">
+                    <Label fx:id="lb_smf" layoutX="467.0" layoutY="38.0" minHeight="16" minWidth="69" text="Semáforo" textFill="#4f4e4a" visible="false">
                      <font>
                         <Font name="Showcard Gothic" size="50.0" />
                      </font>
                   </Label>
-                  <GridPane id="tabuleiro_grid" fx:id="gp_tabuleiro" gridLinesVisible="true" layoutX="27.0" layoutY="119.0" prefHeight="428.0" prefWidth="1135.0">
+                  <GridPane id="tabuleiro_grid" fx:id="gp_tabuleiro" gridLinesVisible="true" layoutX="27.0" layoutY="119.0" prefHeight="428.0" prefWidth="1135.0" visible="false">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -34,12 +48,12 @@
                   </GridPane>
                </children>
             </Pane>
-            <Button id="btn_voltar" fx:id="btn_voltar" layoutX="1044.0" layoutY="716.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="186.0" text="Voltar">
+            <Button id="btn_voltar" fx:id="btn_voltar" layoutX="1044.0" layoutY="716.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="186.0" text="Voltar" visible="false">
                <font>
                   <Font name="Britannic Bold" size="25.0" />
                </font>
             </Button>
-            <Label id="lb_vez" layoutX="381.0" layoutY="35.0" text="Jogador X é a tua vez a jogar!">
+            <Label id="lb_vez" fx:id="lb_VezJogador" layoutX="381.0" layoutY="35.0" text="Aguarda! O adversário está a jogar!" visible="false">
                <font>
                   <Font name="Britannic Bold" size="40.0" />
                </font>
