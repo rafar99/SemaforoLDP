@@ -14,8 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-
+import javafx.scene.layout.GridPane;
 
 /**
  *
@@ -27,18 +26,12 @@ public class FXMLDocumentController {
     private Button btn_voltar;
     @FXML
     private GridPane gp_tabuleiro;
-    @FXML
-    private Pane p_menu;
-    @FXML
-    private Pane p_jogo;
+    
     
     private Estado dados;
     
     
     public void initialize() {
-        p_jogo.setVisible(false);
-        
-        
         this.dados = new Estado();
         int i,j;
         Casa tabuleiro[][] = this.dados.getTabuleiro();
