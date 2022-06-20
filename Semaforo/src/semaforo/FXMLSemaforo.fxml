@@ -19,7 +19,7 @@
                         <Font name="Showcard Gothic" size="50.0" />
                      </font>
                   </Label>
-                  <GridPane id="tabuleiro_grid" gridLinesVisible="true" layoutX="27.0" layoutY="119.0" prefHeight="428.0" prefWidth="1135.0">
+                  <GridPane id="tabuleiro_grid" fx:id="gp_tabuleiro" gridLinesVisible="true" layoutX="27.0" layoutY="119.0" prefHeight="428.0" prefWidth="1135.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

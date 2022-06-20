@@ -18,12 +18,8 @@ import javafx.stage.Stage;
 public class Semaforo extends Application {
     
     
-    jogador[]jogadores;
-    peca[]pecas;
-    
-    
-    
-    
+//    jogador[]jogadores;
+//    peca[]pecas;
     
     @Override
     public void start(Stage stage) throws Exception {

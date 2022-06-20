@@ -27,14 +27,14 @@ public class tabuleiro {
  
     
      
-    //----------contrutor----------------------------------------------
+    //----------construtor----------------------------------------------
     
     
    tabuleiro() {
         this.casa = new peca[linhas][colunas];
     }
     
-    //-------------------------------------------------------------------
+//-------------------------------------------------------------------
 //     
 //    public boolean Jogada(int posArray, int linha, int coluna, String nomeJogador){
 //          boolean jogadaValida = true;
@@ -59,9 +59,5 @@ public class tabuleiro {
 //            }
 //        
 //        return jogadaValida;
-//    }
-//    
-    
-   
-   
+//    }  
 }
