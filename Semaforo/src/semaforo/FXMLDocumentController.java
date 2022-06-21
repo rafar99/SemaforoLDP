@@ -13,25 +13,35 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 /**
  *
  * @author rafar
  */
-public class FXMLDocumentController {
+public class FXMLDocumentController implements Initializable{
     
-    @FXML
-    private Button btn_voltar;
     @FXML
     private GridPane gp_tabuleiro;
     
     
     private Estado dados;
+    @FXML
+    private Label label;
+    @FXML
+    private TextField txf_ip;
+    @FXML
+    private Button btn_voltar;
+    @FXML
+    private Pane p_comecar;
+    @FXML
+    private Button btn_comecar;
     
-    
-    public void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
         this.dados = new Estado();
         int i,j;
         Casa tabuleiro[][] = this.dados.getTabuleiro();
@@ -89,5 +99,10 @@ public class FXMLDocumentController {
         }
         // Avança para o próximo jogador
         //this.dados.setJogador();
+    }
+
+    @FXML
+    private void começar(ActionEvent event) {
+          p_comecar.setVisible(false);
     }
 }
