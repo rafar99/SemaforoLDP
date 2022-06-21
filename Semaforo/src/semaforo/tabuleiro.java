@@ -16,12 +16,12 @@ import javafx.scene.layout.GridPane;
 public class tabuleiro {
     
     private transient GridPane gridJogo;
-    private peca[] pecasVerdes;
-    private peca[] pecasAmarelas;
-    private peca[] pecasVermelhas;
+    private Peca[] pecasVerdes;
+    private Peca[] pecasAmarelas;
+    private Peca[] pecasVermelhas;
     
     
-    peca[][] casa;
+    Peca[][] casa;
     int linhas = 3;
     int colunas = 4;
  
@@ -31,7 +31,7 @@ public class tabuleiro {
     
     
    tabuleiro() {
-        this.casa = new peca[linhas][colunas];
+        this.casa = new Peca[linhas][colunas];
     }
     
 //-------------------------------------------------------------------

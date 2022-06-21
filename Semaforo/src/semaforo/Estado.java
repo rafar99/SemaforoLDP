@@ -20,7 +20,7 @@ public class Estado {
         int i,j;
         for(i = 0; i < 3; i++){
             for(j = 0; j < 4; j++){
-                peca p = new peca(TipoPeca.Casa_Vazia);
+                Peca p = new Peca(TipoPeca.Casa_Vazia);
                 Casa elem = new Casa(p.tipo);
                 this.tabuleiro[i][j] = elem;
             } 
@@ -34,16 +34,26 @@ public class Estado {
     
     public boolean verifica_vitoria(){
         // 1) Verifica existência de uma horizontal com peças iguais
-        int i,j;
+        int i,j;  //i-linhas; j-colunas
         for(i = 0; i < 3; i++){
             for(TipoPeca p : TipoPeca.values()){
                 if(p == p.Casa_Vazia)
                     continue;
                 int contagem = 0;
-                for(j = 0; j < 4; j++){
+                for(j = 0; j < 4; j++){  // verificação horizontal
                     if(this.tabuleiro[i][j].getPeça().equals(p))
                         contagem += 1;
                 }
+                
+                for(i = 0; i < 3; j++){  // verificação vertical
+                    if(this.tabuleiro[i][j].getPeça().equals(p))
+                        contagem += 1;
+                }
+                
+                
+                
+                
+                
                 if (contagem > 2){
                     return true;
                 }
@@ -59,6 +69,9 @@ public class Estado {
         }
         return true;
     }
+    
+    
+    
 
 
 
