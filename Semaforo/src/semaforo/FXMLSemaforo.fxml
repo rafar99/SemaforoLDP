@@ -40,7 +40,7 @@
                   <Font name="Britannic Bold" size="25.0" />
                </font>
             </Button>
-            <Label id="lb_vez" layoutX="381.0" layoutY="35.0" text="Aguarda! O adversário está a jogar!">
+            <Label id="lb_vez" layoutX="381.0" layoutY="35.0" text="É a tua vez de jogar!">
                <font>
                   <Font name="Britannic Bold" size="40.0" />
                </font>
@@ -51,10 +51,10 @@
          <children>
             <ImageView fitHeight="768.0" fitWidth="1980.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/menu.png" />
+                  <Image url="@../../resources/Images/menu.png" />
                </image>
             </ImageView>
-            <Button id="btn_voltar" fx:id="btn_comecar" layoutX="482.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#começar" prefHeight="73.0" prefWidth="316.0" text="Começar">
+            <Button id="btn_comecar" fx:id="btn_comecar" layoutX="482.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#começar" prefHeight="73.0" prefWidth="316.0" text="Começar">
                <font>
                   <Font name="Britannic Bold" size="48.0" />
                </font>
@@ -67,10 +67,10 @@
       </Pane>
       <Pane fx:id="p_id" prefHeight="768.0" prefWidth="1280.0" visible="false">
          <children>
-            <TextField fx:id="txt_ip" layoutX="460.0" layoutY="373.0" prefHeight="58.0" prefWidth="325.0" />
+            <TextField fx:id="txf_ip" layoutX="460.0" layoutY="373.0" prefHeight="58.0" prefWidth="325.0" />
             <ImageView fitHeight="768.0" fitWidth="1280.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/menu.png" />
+                  <Image url="@../../resources/Images/menu.png" />
                </image>
             </ImageView>
             <Label layoutX="457.0" layoutY="321.0" prefHeight="41.0" prefWidth="331.0" text="Insere aqui o IP:">

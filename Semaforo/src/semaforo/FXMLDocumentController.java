@@ -30,11 +30,11 @@ import javafx.stage.Stage;
  */
 public class FXMLDocumentController implements Initializable{
     
+   
+    private Estado dados;
+    
     @FXML
     private GridPane gp_tabuleiro;
-    
-    
-    private Estado dados;
     @FXML
     private Label label;
     @FXML
@@ -49,12 +49,35 @@ public class FXMLDocumentController implements Initializable{
     @FXML
     private Label lb_bemVindo;
     @FXML
-    private TextField txt_ip;
-    @FXML
     private Pane p_começar;
+    @FXML
+    private TextField txf_ip;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+//        this.dados = new Estado();
+//        int i,j;
+//        Casa tabuleiro[][] = this.dados.getTabuleiro();
+//        
+//         for(i = 0; i < 3; i++){
+//            for(j = 0; j < 4; j++){
+//                System.out.println(i + "," + j);
+//                Casa elem = tabuleiro[i][j];
+//                elem.setColumn(j);
+//                elem.setIndex(i);
+//                Celula cel = new Celula(elem.getPeça().getImg(), elem);
+//                cel.setOnMouseClicked(this::joga_ronda);
+//                
+//                GridPane.setRowIndex(cel, i);
+//                GridPane.setColumnIndex(cel, j);
+//
+//                this.gp_tabuleiro.getChildren().add(cel);
+//            } 
+//        }
+        novo_jogo();
+    }    
+    
+    private void novo_jogo(){
         this.dados = new Estado();
         int i,j;
         Casa tabuleiro[][] = this.dados.getTabuleiro();
@@ -74,13 +97,13 @@ public class FXMLDocumentController implements Initializable{
                 this.gp_tabuleiro.getChildren().add(cel);
             } 
         }
-    }    
+    }
     
     private void joga_ronda(MouseEvent e) {
         Node source = (Node)e.getSource() ;
         Integer colIndex = GridPane.getColumnIndex(source);
         Integer rowIndex = GridPane.getRowIndex(source);
-        System.out.printf("Mouse entered cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
+        System.out.printf("Mouse entered cell [%d, %d]%n", rowIndex.intValue(), colIndex.intValue());
         
         // Verifica se pode adicionar a peça / alterar a peça
         boolean flag_valida = this.dados.verifica_jogada(rowIndex, colIndex);
@@ -101,11 +124,20 @@ public class FXMLDocumentController implements Initializable{
         }
         
         // Verifica se existe condição de vitória
-        boolean flag_vitoria = this.dados.verifica_vitoria();
+        boolean flag_vitoria = this.dados.venceuJogo();
         if (flag_vitoria){
             //sai do jogo e/ou mostra um alerta
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Vencedor");
+
+            alert.setHeaderText(null);
+            alert.setContentText("Lamento perdeste o jogo!");
+            alert.showAndWait();
             System.out.println("Ganhei");
-            return;
+            p_começar.setVisible(true);
+            p_jogo.setVisible(false);
+            novo_jogo();
+            
         }
         // Avança para o próximo jogador
         //this.dados.setJogador();
@@ -114,10 +146,17 @@ public class FXMLDocumentController implements Initializable{
 
 
     @FXML
-    private void começar(MouseEvent event) {
+    private void começar(MouseEvent event) throws IOException {
         p_começar.setVisible(false);
-         p_jogo.setVisible(true);
-         p_id.setVisible(false);
-         
+        p_jogo.setVisible(true);
+        p_id.setVisible(false);
+        this.dados.cs.liga();
+    }
+    
+    @FXML
+    private void voltar(MouseEvent event){
+        p_começar.setVisible(true);
+        p_jogo.setVisible(true);
+        p_id.setVisible(false);
     }
 }

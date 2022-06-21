@@ -19,15 +19,15 @@ public class Celula extends ImageView{ //contém info da casa
     
     public Celula(Image img, Casa elem){   
         super(img);
-        super.setFitHeight(20);
-        super.setFitWidth(20);
+        super.setFitHeight(100);
+        super.setFitWidth(100);
+        super.setLayoutX(20);
         this.elem = elem;
     }
     
     public void atualizaCelula(){
         this.elem.proximaPeca();
         super.setImage(this.elem.getPeça().getImg());
-     
     }
     
 }

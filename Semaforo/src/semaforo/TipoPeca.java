@@ -15,11 +15,10 @@ import javafx.scene.image.Image;
  * @author rafar
  */
 public enum TipoPeca {
-    Casa_Vazia("/Images/red.png") ,
+    Casa_Vazia("/Images/empty.png") ,
     Verde("/Images/green.png"),
     Amarela("/Images/yellow.png"),
     Vermelha("/Images/red.png");
-    
     
     private String caminho;
     private Image img;
