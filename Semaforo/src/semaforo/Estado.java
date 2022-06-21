@@ -44,23 +44,30 @@ public class Estado {
                     if(this.tabuleiro[i][j].getPeça().equals(p))
                         contagem += 1;
                 }
-                
-                for(i = 0; i < 3; j++){  // verificação vertical
-                    if(this.tabuleiro[i][j].getPeça().equals(p))
-                        contagem += 1;
-                }
-                
-                
-                
-                
-                
                 if (contagem > 2){
                     return true;
                 }
             }
         }
+        
+        for(j=0; j<4; j++){
+            for(TipoPeca p : TipoPeca.values()){
+                if(p == p.Casa_Vazia)
+                    continue;
+                int contagem = 0;
+                for(i=0; i<3; i++){
+                    if(this.tabuleiro[i][j].getPeça().equals(p))
+                        contagem += 1;
+                }
+                
+                  if (contagem > 2){
+                    return true;
+                  }
+            }
+        }
         return false;
     }
+    
     
     public boolean verifica_jogada(int row, int col){
         // 1) Se a peça é vermelha

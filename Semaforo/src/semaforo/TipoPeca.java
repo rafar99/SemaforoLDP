@@ -8,17 +8,17 @@ package semaforo;
 import java.io.InputStream;
 import java.net.URL;
 import javafx.scene.image.Image;
-import javax.swing.ImageIcon;
+
 
 /**
  *
  * @author rafar
  */
 public enum TipoPeca {
-    Casa_Vazia("C:\\Users\\anari\\Desktop\\SemaforoLDP\\Semaforo\\resources\\green.png") ,
-    Verde("green.png"),
-    Amarela("green.png"),
-    Vermelha("green.png");
+    Casa_Vazia("/Images/red.png") ,
+    Verde("/Images/green.png"),
+    Amarela("/Images/yellow.png"),
+    Vermelha("/Images/red.png");
     
     
     private String caminho;
@@ -26,10 +26,8 @@ public enum TipoPeca {
     
     TipoPeca(String img){
         this.caminho=img;
-       // InputStream input = getClass().getClassLoader().getResourceAsStream(img);
-       //URL url = getClass().getResource("C:\\Users\\anari\\Desktop\\SemaforoLDP\\Semaforo\\resources\\green.png");
+       String file = this.getClass().getResource(img).toString();
        this.img=new Image(img);
-       int i = 5;
     }
 
     public Image getImg() {

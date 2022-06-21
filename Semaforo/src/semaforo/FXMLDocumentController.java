@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -37,20 +38,20 @@ public class FXMLDocumentController implements Initializable{
     @FXML
     private Label label;
     @FXML
-    private TextField txf_ip;
-    @FXML
     private Button btn_voltar;
-    private Pane p_comecar;
     @FXML
     private Button btn_comecar;
-    @FXML
-    private Pane p_começar;
+ 
     @FXML
     private Pane p_id;
     @FXML
     private Pane p_jogo;
     @FXML
     private Label lb_bemVindo;
+    @FXML
+    private TextField txt_ip;
+    @FXML
+    private Pane p_começar;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -87,18 +88,15 @@ public class FXMLDocumentController implements Initializable{
         if (flag_valida){
             // Modifica a matriz local de 
             
-           // CasaVazia nodeCV = (CasaVazia) source;
-            //Verde nodeVe = (Verde) source;
-            //Amarela nodeA = (Amarela) source;
-            //Vermelha nodeV = (Vermelha) source;
-            //node.atualizaCelula();
-            
-            //if (TipoPeca.Casa_Vazia instanceof TipoPeca) {
-              //  nodeCV.atualizaCelula();
-                
-            //}
+           Celula node = (Celula) source;
+            node.atualizaCelula();
         } else{
-            // mostra um alerta a dizer que a jogada é invalida
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Erro");
+
+            alert.setHeaderText(null);
+            alert.setContentText("Movimento Inválido!");
+            alert.showAndWait();
             return;
         }
         
@@ -113,22 +111,13 @@ public class FXMLDocumentController implements Initializable{
         //this.dados.setJogador();
     }
 
+
+
     @FXML
-    private void começar(ActionEvent event)  throws IOException {
-         //p_comecar.setVisible(true);
-         //p_jogo.setVisible(false);
-         //p_id.setVisible(true);
+    private void começar(MouseEvent event) {
+        p_começar.setVisible(false);
+         p_jogo.setVisible(true);
+         p_id.setVisible(false);
          
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
-        Parent root = loader.load();
-        //MenuController mc = loader.getController();
-       // mc.setDadosJogo(dj);
-
-       // Stage window = (Stage) Sair.getScene().getWindow();
-       // window.setScene(new Scene(root));
-        
-       
-
-       
     }
 }
