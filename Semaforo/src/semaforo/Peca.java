@@ -7,7 +7,7 @@ package semaforo;
 
 /**
  *
- * @author rafar
+ * @author rafar e rita
  */
 public class Peca {
     
@@ -19,6 +19,10 @@ public class Peca {
         this.tipo = tipo;
     }
 
+    /**
+     *
+     * @return
+     */
     public TipoPeca getTipo() {
         return tipo;
     }

@@ -7,35 +7,59 @@ package semaforo;
 
 /**
  *
- * @author rafar
+ * @author rafar e rita
  */
 public class Casa {
     
     private TipoPeca peca;
     private int index,col;
     
+    /**
+     *Construtor inicia a peca, o index e o col
+     * @param p
+     */
     public Casa(TipoPeca p){
         this.peca = p;
         this.index = index;
         this.col = col;
     }
     
+    /**
+     *
+     * @param p
+     */
     public void setPeça(TipoPeca p){
         this.peca = p;
     }
     
+    /**
+     *
+     * @param index
+     */
     public void setIndex(int index){
         this.index = index;
     }
     
+    /**
+     *
+     * @param column
+     */
     public void setColumn(int column){
         this.col = column;
     }
     
+    /**
+     *
+     * @return
+     */
     public TipoPeca getPeça(){
         return this.peca;
     }
     
+    /**
+     * Este método é responsável pela alteração da peça, por exemplo, passar de 
+     * uma peça verde para uma amarela
+     */
     public void proximaPeca(){
         if (null != this.peca){
             switch (this.peca) {

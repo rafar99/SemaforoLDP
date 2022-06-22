@@ -47,7 +47,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="p_começar" prefHeight="768.0" prefWidth="1280.0" visible="false">
+      <Pane fx:id="p_começar" prefHeight="768.0" prefWidth="1280.0">
          <children>
             <ImageView fitHeight="768.0" fitWidth="1980.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -65,7 +65,7 @@
                </font></Label>
          </children>
       </Pane>
-      <Pane fx:id="p_id" prefHeight="768.0" prefWidth="1280.0">
+      <Pane fx:id="p_id" prefHeight="768.0" prefWidth="1280.0" visible="false">
          <children>
             <TextField id="txt_ip" fx:id="txf_ip" layoutX="481.0" layoutY="373.0" prefHeight="58.0" prefWidth="325.0" />
             <ImageView fitHeight="768.0" fitWidth="1280.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">

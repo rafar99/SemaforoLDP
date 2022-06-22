@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author rafar
+ * @author rafar e rita
  */
 public class Semaforo extends Application {
     

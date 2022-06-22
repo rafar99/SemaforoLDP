@@ -17,6 +17,11 @@ public class Estado {
     Client cs;
     String ServerName = "192.168.0.103";
     int ServerPort = 1234;
+
+    /**
+     *O <p>construtor inicia um novo cliente recebendo o seu servername e o serverport;
+     * Inicia o tabuleiro e coloca as peças na casa vazia do array bidimensional</p>
+     */
     public Estado() {
         
         this.cs = new Client(ServerName, ServerPort);
@@ -33,6 +38,10 @@ public class Estado {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public Casa[][] getTabuleiro(){
         return this.tabuleiro;
     }
@@ -40,7 +49,15 @@ public class Estado {
     
    
     
-    //Metodo que devolve se as casas irão ter as 3 peças da mesma cor
+    
+
+    /**
+     * Este método verifica se as casas da matriz irão ter as 3 peças da mesma cor
+     * @param p1
+     * @param p2
+     * @param p3
+     * @return
+     */
     public boolean verificaPeca(Casa p1, Casa p2, Casa p3) {
         if (p1.getPeça() == TipoPeca.Verde && p2.getPeça() == TipoPeca.Verde && p3.getPeça() == TipoPeca.Verde) {
             return true;
@@ -53,7 +70,11 @@ public class Estado {
         }
     }
     
-    
+    /**
+     * <p>Este método verifica se em algum lugar do tabuleiro há uma linha de 3 peças consecutivas 
+     * com a mesma cor (na diagonal ou vertical ou horizontal)</p>
+     * @return
+     */
     public boolean venceuJogo() {
         boolean resultado;
 
@@ -105,7 +126,16 @@ public class Estado {
         return resultado;
     }
 
-    
+    /**
+     *
+     * @param row
+     * @param col
+     * <p>Este método verifica se a peça que está casa é vermelha. Se for, 
+     * como essa é uma das condições do jogo, retorna um FALSE, senão retorna sempre
+     * TRUE.</p>
+     * 
+     * @return
+     */
     public boolean verifica_jogada(int row, int col){
         // 1) Se a peça é vermelha
         if (this.tabuleiro[row][col].getPeça() == TipoPeca.Vermelha){

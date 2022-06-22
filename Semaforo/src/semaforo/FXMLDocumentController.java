@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author rafar
+ * @author rafar e rita
  */
 public class FXMLDocumentController implements Initializable{
     
@@ -55,28 +55,18 @@ public class FXMLDocumentController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        this.dados = new Estado();
-//        int i,j;
-//        Casa tabuleiro[][] = this.dados.getTabuleiro();
-//        
-//         for(i = 0; i < 3; i++){
-//            for(j = 0; j < 4; j++){
-//                System.out.println(i + "," + j);
-//                Casa elem = tabuleiro[i][j];
-//                elem.setColumn(j);
-//                elem.setIndex(i);
-//                Celula cel = new Celula(elem.getPeça().getImg(), elem);
-//                cel.setOnMouseClicked(this::joga_ronda);
-//                
-//                GridPane.setRowIndex(cel, i);
-//                GridPane.setColumnIndex(cel, j);
-//
-//                this.gp_tabuleiro.getChildren().add(cel);
-//            } 
-//        }
+
         novo_jogo();
     }    
     
+    
+/**
+ *
+ * <p>Este método inicia o estado do jogo e o tabuleiro com peças do tipo casa_vazia.
+ * Por sua vez, percorre a matriz e associa uma celula a cada casa passando a imagem 
+ * do TipoPeca atual e a casa.
+ * Posto isto, chama um método do JavaFX, onMouseClick, que chama o método joga_ronde</p>
+ */
     private void novo_jogo(){
         this.dados = new Estado();
         int i,j;
@@ -99,6 +89,15 @@ public class FXMLDocumentController implements Initializable{
         }
     }
     
+/**
+ * Este método verifica se a jogada é válida através da flag_valida que obtem o 
+ * seu valor conforme o que lhe é retornado do método verifica_jogada (TRUE ou FALSE)
+ * Se a flag retornar TRUE, então é possível fazer uma jogada e assim atualiza essa Célula,
+ * caso contrário mostra um alerta ao jogador a dizer que o movimento é inválido.
+ * A verificação da vitória é recebida através da flag_vitoria que recebe o valor do método
+ * venceuJogo(), se retornar TRUE mostra uma mensagem e volta ao inicio.
+ * 
+ */
     private void joga_ronda(MouseEvent e) {
         Node source = (Node)e.getSource() ;
         Integer colIndex = GridPane.getColumnIndex(source);
@@ -111,14 +110,14 @@ public class FXMLDocumentController implements Initializable{
         if (flag_valida){
             // Modifica a matriz local de 
             
-           Celula node = (Celula) source;
+            Celula node = (Celula) source;
             node.atualizaCelula();
         } else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Erro");
 
             alert.setHeaderText(null);
-            alert.setContentText("Movimento Inválido!");
+            alert.setContentText("Movimento Inválido! Esta casa já contém uma peça vermelha");
             alert.showAndWait();
             return;
         }

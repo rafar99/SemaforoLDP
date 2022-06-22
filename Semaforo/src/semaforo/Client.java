@@ -9,7 +9,7 @@ import java.io.*;
 import java.net.*;
 /**
  *
- * @author rafar
+ * @author rafar e rita
  */
 public class Client {
     String serverName;
@@ -20,6 +20,14 @@ public class Client {
     DataOutputStream dos;
     boolean ligado;
 
+    /**
+     *O construtor recebe o nome do servidor, ou seja, o ip e a porta.
+     * Inicia o socket e o dis, e dos como null
+     * @param serverName
+     * @param serverPort
+     * 
+     *
+     */
     public Client(String serverName, int serverPort) {
         this.serverName = serverName;
         this.serverPort = serverPort;
@@ -29,6 +37,10 @@ public class Client {
         this.ligado = false;
     }
 
+    /**
+     * Este método liga o utilizador ao servidor
+     * @throws IOException
+     */
     public void liga() throws IOException {
         if (!ligado) {
             InetAddress ip = InetAddress.getByName(serverName);
@@ -39,6 +51,10 @@ public class Client {
         ligado = true;
     }
 
+    /**
+     * Este método desliga o utilizador do servidor
+     * @throws IOException
+     */
     public void desliga() throws IOException {
         if (ligado) {
             s.close();

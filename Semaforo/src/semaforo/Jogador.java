@@ -7,7 +7,7 @@ package semaforo;
 
 /**
  *
- * @author rafar
+ * @author rafar e rita
  */
 public class Jogador {
     

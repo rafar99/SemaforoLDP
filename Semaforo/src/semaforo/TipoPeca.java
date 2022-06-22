@@ -11,8 +11,9 @@ import javafx.scene.image.Image;
 
 
 /**
- *
- * @author rafar
+ * Enumeraçao do TipoPeca que contém as várias possibilidades de peça e as associa ao caminho das
+ * respetivas imagens
+ * @author rafar e rita
  */
 public enum TipoPeca {
     Casa_Vazia("/Images/empty.png") ,
@@ -22,6 +23,11 @@ public enum TipoPeca {
     
     private String caminho;
     private Image img;
+    
+   /**
+ * O construtor recebe uma string da imagem, inicia-a, inicia o file e a img
+ */
+    
     
     TipoPeca(String img){
         this.caminho=img;
