@@ -32,5 +32,20 @@ and open the template in the editor.
     -fx-text-fill: black;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
-   
+}
+
+#btn_iniciar{
+    -fx-background-color: #629B3C;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+#txt_ip{
+    -fx-background-color: #629B3C;
+    -fx-text-fill: black;
+        
 }

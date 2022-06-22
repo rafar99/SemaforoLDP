@@ -150,7 +150,7 @@ public class FXMLDocumentController implements Initializable{
         p_começar.setVisible(false);
         p_jogo.setVisible(true);
         p_id.setVisible(false);
-        this.dados.cs.liga();
+        //this.dados.cs.liga();
     }
     
     @FXML
