@@ -11,49 +11,35 @@ import java.util.*;
 
 /**
  *
- * @author rafar
+ * @author rafar e rita
  */
 public class Server {
-    private static int serverPort = 1234;
-    final private static List<ClientHandler> jogadores = new ArrayList<>();
+    
+    static Vector<ClientHandler> jogadores = new Vector<>();
     static int i = 0;
-    private static Socket s;
+    final static int ServerPort = 1234;
 
     public static void main(String[] args) throws IOException {
         System.out.println("Servidor aceita conexões.");
-        ServerSocket ss = new ServerSocket(serverPort);
-        
-        Thread server = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if(i>2){
-                    while (true) {
-                        try{
+        ServerSocket ss = new ServerSocket(ServerPort);
 
-                        s = ss.accept();
-                        System.out.println("Novo client recebido : " + s);
+        Socket s;
+        while (true) {
+            s = ss.accept();
+            System.out.println("Novo client recebido : " + s);
 
-                        DataInputStream dis = new DataInputStream(s.getInputStream());
-                        DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+            DataInputStream dis = new DataInputStream(s.getInputStream());
+            DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 
-                        ClientHandler mtch = new ClientHandler(s, "client " + i, dis, dos);
-                        Thread t = new Thread(mtch);
+            ClientHandler mtch = new ClientHandler(s, "client " + i, dis, dos);
+            Thread t = new Thread(mtch);
 
-                        i++;
-                        System.out.println("Adiciona cliente " + i + " à lista ativa.");
-                        jogadores.add(mtch);
-                        t.start();
+            System.out.println("Adiciona cliente " + i + " à lista ativa.");
+            jogadores.add(mtch);
+            t.start();
 
-                        } catch (IOException ex){
-                            System.out.println("ERRO: " + ex);
-                        }
-                    }  
-                } else {
-                    System.out.println("Número máximo de Jogadores atingido: " + i + "!");
-                }
-            }
-        });
-        
+            i++;
+        }
     }
 
     private static class ClientHandler implements Runnable {

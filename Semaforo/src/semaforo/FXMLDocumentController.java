@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 public class FXMLDocumentController implements Initializable{
     
    
-    private Estado dados;
+    private Jogo dados;
     
     @FXML
     private GridPane gp_tabuleiro;
@@ -55,7 +55,6 @@ public class FXMLDocumentController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         novo_jogo();
     }    
     
@@ -68,7 +67,7 @@ public class FXMLDocumentController implements Initializable{
  * Posto isto, chama um método do JavaFX, onMouseClick, que chama o método joga_ronde</p>
  */
     private void novo_jogo(){
-        this.dados = new Estado();
+        this.dados = new Jogo();
         int i,j;
         Casa tabuleiro[][] = this.dados.getTabuleiro();
         
