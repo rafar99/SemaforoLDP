@@ -5,11 +5,13 @@
  */
 package semaforo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author rafar e rita
  */
-public class Casa {
+public class Casa implements Serializable {
     
     private TipoPeca peca;
     private int index,col;

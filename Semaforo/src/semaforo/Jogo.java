@@ -5,26 +5,22 @@
  */
 package semaforo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author rafar
  */
-public class Jogo {
+public class Jogo implements Serializable {
     
     private Casa tabuleiro[][];
-    private Jogador jogador;
-    
-    Client cs;
-    String ServerName = "192.168.0.103";
-    int ServerPort = 1234;
-
+//    private Jogador jogador;
     /**
      *O <p>construtor inicia um novo cliente recebendo o seu servername e o serverport;
      * Inicia o tabuleiro e coloca as peças na casa vazia do array bidimensional</p>
      */
     public Jogo() {
         
-        this.cs = new Client(ServerName, ServerPort);
 
         this.tabuleiro = new Casa[3][4];
 //        this.Jogador = Jogador;
@@ -45,12 +41,7 @@ public class Jogo {
     public Casa[][] getTabuleiro(){
         return this.tabuleiro;
     }
-    
-    
-   
-    
-    
-
+      
     /**
      * Este método verifica se as casas da matriz irão ter as 3 peças da mesma cor
      * @param p1
