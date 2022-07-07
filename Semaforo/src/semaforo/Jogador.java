@@ -5,21 +5,23 @@
  */
 package semaforo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author rafar e rita
  */
-public class Jogador {
+public class Jogador implements Serializable {
     
-     private int jogou;
+     private boolean jogou;
      String nome; 
 
     
     //---------contrutor------------------------------------------ 
      
      
-     public Jogador(int jogou, String nome) {
-        this.jogou = jogou;
+     public Jogador(String nome) {
+        this.jogou = false;
         this.nome = nome;
     }
 
@@ -27,11 +29,11 @@ public class Jogador {
     
     //--------Getters e Setters-------------------------------------
     
-    public int getJogou() {
+    public boolean getJogou() {
         return jogou;
     }
 
-    public void setJogou(int jogou) {
+    public void setJogou(boolean jogou) {
         this.jogou = jogou;
     }
 
