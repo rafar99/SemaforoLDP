@@ -75,9 +75,11 @@ public class Server {
 ////        s.runServer();
 //        s.receberCasas();
 //    }
+//        static Socket s;
     
         public static void main(String[] args) throws Exception {
-
+        Jogador svJOG = new Jogador("server");
+        Jogo c;
         ServerSocket ss = new ServerSocket(6666);
         System.out.println("Aceita conecções ...");
         Socket s = ss.accept();
@@ -86,15 +88,25 @@ public class Server {
         DataInputStream din = new DataInputStream(s.getInputStream());
         DataOutputStream dout = new DataOutputStream(s.getOutputStream());
 
+        ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
+        ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String strCli = "", strSer = "";
 
         while (!strCli.equals("stop")){
+
             strCli = din.readUTF();
+            c = (Jogo) ois.readObject();
+            
             System.out.println("Cliente: " + strCli);                        
+            System.out.println("Servidor--> " + svJOG.getNome());                        
             strSer = br.readLine();
             dout.writeUTF(strSer);
+            
+//            oos.writeObject(c.getTabuleiro());
+            oos.flush();
             dout.flush();
         }
 
@@ -103,4 +115,14 @@ public class Server {
         ss.close();
 
     }
+        
+//    public void enviarInfo(Jogo tabuleiro) throws IOException, ClassNotFoundException {
+//        ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+//
+//        oos.writeObject(tabuleiro.getTabuleiro());
+//        System.out.println("Mensagem enviada");
+//
+//    }
+        
+        
 }

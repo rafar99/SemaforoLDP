@@ -14,16 +14,12 @@ import java.io.Serializable;
 public class Jogo implements Serializable {
     
     private Casa tabuleiro[][];
-//    private Jogador jogador;
     /**
      *O <p>construtor inicia um novo cliente recebendo o seu servername e o serverport;
      * Inicia o tabuleiro e coloca as peças na casa vazia do array bidimensional</p>
      */
     public Jogo() {
-        
-
         this.tabuleiro = new Casa[3][4];
-//        this.Jogador = Jogador;
         int i,j;
         for(i = 0; i < 3; i++){
             for(j = 0; j < 4; j++){

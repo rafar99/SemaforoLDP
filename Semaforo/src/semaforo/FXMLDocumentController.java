@@ -5,6 +5,7 @@
  */
 package semaforo;
 
+import Server.Server;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -132,7 +133,8 @@ public class FXMLDocumentController implements Initializable{
             alert.setTitle("Vencedor");
 
             alert.setHeaderText(null);
-            alert.setContentText("Lamento perdeste o jogo!");
+            
+            alert.setContentText("Terminou o jogo!");
             alert.showAndWait();
             System.out.println("Ganhei");
             p_começar.setVisible(true);
