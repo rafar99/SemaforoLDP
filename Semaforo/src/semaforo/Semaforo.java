@@ -5,6 +5,8 @@
  */
 package semaforo;
 
+import Client.ClientConnection;
+import java.util.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,15 +18,20 @@ import javafx.stage.Stage;
  * @author rafar e rita
  */
 public class Semaforo extends Application {
+        private ClientConnection client_con;
     
-    
-//    jogador[]jogadores;
-//    peca[]pecas;
+    public void conectToServer(FXMLDocumentController cont) throws Exception{
+        this.client_con = new ClientConnection(cont);
+    }
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLSemaforo.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLSemaforo.fxml"));
+        Parent root = loader.load();
         
+        FXMLDocumentController controller = loader.getController();
+        this.conectToServer(controller);
+        controller.setClient(this.client_con);
         Scene scene = new Scene(root);
         
         stage.setScene(scene);

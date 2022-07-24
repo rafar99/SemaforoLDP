@@ -13,31 +13,26 @@ import java.io.Serializable;
  */
 public class Jogo implements Serializable {
     
-    private Casa tabuleiro[][];
+    Tabuleiro tabuleiro;
+    int jogador_atual;
+    String mensagem;
     /**
      *O <p>construtor inicia um novo cliente recebendo o seu servername e o serverport;
      * Inicia o tabuleiro e coloca as peças na casa vazia do array bidimensional</p>
      */
     public Jogo() {
-        this.tabuleiro = new Casa[3][4];
-        int i,j;
-        for(i = 0; i < 3; i++){
-            for(j = 0; j < 4; j++){
-                Peca p = new Peca(TipoPeca.Casa_Vazia);
-                Casa elem = new Casa(p.tipo);
-                this.tabuleiro[i][j] = elem;
-            } 
-        }
+        this.tabuleiro = new Tabuleiro();
+        this.jogador_atual = 0;
+        this.mensagem = "";
+    }
+          
+    public int getJogadorAtual(){
+        return this.jogador_atual;
     }
     
-    /**
-     *
-     * @return
-     */
-    public Casa[][] getTabuleiro(){
-        return this.tabuleiro;
+    public String getMensagem(){
+        return this.mensagem;
     }
-      
     /**
      * Este método verifica se as casas da matriz irão ter as 3 peças da mesma cor
      * @param p1
@@ -66,46 +61,46 @@ public class Jogo implements Serializable {
         boolean resultado;
 
         //verificar primeiras 3 posiçoes da primeira linha
-        if (verificaPeca(tabuleiro[0][0], tabuleiro[0][1], tabuleiro[0][2])) {
+        if (verificaPeca(tabuleiro.tabuleiro[0][0], tabuleiro.tabuleiro[0][1], tabuleiro.tabuleiro[0][2])) {
             resultado = true;
         } //verificar ultimas 3 posiçoes da primeira linha
-        else if (verificaPeca(tabuleiro[0][1], tabuleiro[0][2], tabuleiro[0][3])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[0][1], tabuleiro.tabuleiro[0][2], tabuleiro.tabuleiro[0][3])) {
             resultado = true;
         } //verificar primeiras 3 posiçoes da segunda linha
-        else if (verificaPeca(tabuleiro[1][0], tabuleiro[1][1], tabuleiro[1][2])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[1][0], tabuleiro.tabuleiro[1][1], tabuleiro.tabuleiro[1][2])) {
             resultado = true;
         } //verificar ultimas 3 posiçoes da segunda linha
-        else if (verificaPeca(tabuleiro[1][1], tabuleiro[1][2], tabuleiro[1][3])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[1][1], tabuleiro.tabuleiro[1][2], tabuleiro.tabuleiro[1][3])) {
             resultado = true;
         } //verificar primeiras 3 posiçoes da terceira linha
-        else if (verificaPeca(tabuleiro[2][0], tabuleiro[2][1], tabuleiro[2][2])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[2][0], tabuleiro.tabuleiro[2][1], tabuleiro.tabuleiro[2][2])) {
             resultado = true;
         } //verificar ultimas 3 posiçoes da terceira linha
-        else if (verificaPeca(tabuleiro[2][1], tabuleiro[2][2], tabuleiro[2][3])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[2][1], tabuleiro.tabuleiro[2][2], tabuleiro.tabuleiro[2][3])) {
             resultado = true;
         } //verificar a 1ºcoluna
-        else if (verificaPeca(tabuleiro[0][0], tabuleiro[1][0], tabuleiro[2][0])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[0][0], tabuleiro.tabuleiro[1][0], tabuleiro.tabuleiro[2][0])) {
             resultado = true;
         } //verificar a 2ºcoluna
-        else if (verificaPeca(tabuleiro[0][1], tabuleiro[1][1], tabuleiro[2][1])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[0][1], tabuleiro.tabuleiro[1][1], tabuleiro.tabuleiro[2][1])) {
             resultado = true;
         } //verificar a 3ºcoluna
-        else if (verificaPeca(tabuleiro[0][2], tabuleiro[1][2], tabuleiro[2][2])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[0][2], tabuleiro.tabuleiro[1][2], tabuleiro.tabuleiro[2][2])) {
             resultado = true;
         } //verificar a 4ºcoluna
-        else if (verificaPeca(tabuleiro[0][3], tabuleiro[1][3], tabuleiro[2][3])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[0][3], tabuleiro.tabuleiro[1][3], tabuleiro.tabuleiro[2][3])) {
             resultado = true;
         } //verificar a 1ºdiagonal
-        else if (verificaPeca(tabuleiro[0][0], tabuleiro[1][1], tabuleiro[2][2])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[0][0], tabuleiro.tabuleiro[1][1], tabuleiro.tabuleiro[2][2])) {
             resultado = true;
         } //verificar 2ºdiagonal
-        else if (verificaPeca(tabuleiro[0][1], tabuleiro[1][2], tabuleiro[2][3])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[0][1], tabuleiro.tabuleiro[1][2], tabuleiro.tabuleiro[2][3])) {
             resultado = true;
         } //verificar 3ºdiagonal
-        else if (verificaPeca(tabuleiro[0][2], tabuleiro[1][1], tabuleiro[2][0])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[0][2], tabuleiro.tabuleiro[1][1], tabuleiro.tabuleiro[2][0])) {
             resultado = true;
         } //verificar 4ºdiagonal 
-        else if (verificaPeca(tabuleiro[0][3], tabuleiro[1][2], tabuleiro[2][1])) {
+        else if (verificaPeca(tabuleiro.tabuleiro[0][3], tabuleiro.tabuleiro[1][2], tabuleiro.tabuleiro[2][1])) {
             resultado = true;
         } else {
             resultado = false;
@@ -125,9 +120,13 @@ public class Jogo implements Serializable {
      */
     public boolean verifica_jogada(int row, int col){
         // 1) Se a peça é vermelha
-        if (this.tabuleiro[row][col].getPeça() == TipoPeca.Vermelha){
+        if (this.tabuleiro.tabuleiro[row][col].getPeça() == TipoPeca.Vermelha){
             return false;
         }
         return true;
+    }
+
+    public void avança_jogador(){
+        this.jogador_atual = 1 - this.jogador_atual;
     }
 }

@@ -1,120 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Client;
 
-import java.io.*;
-import java.net.*;
-import semaforo.Casa;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import semaforo.Jogo;
-/**
- * @author rafar e rita
- */
-public class Client {
-   
-    
-   /* String serverName;
-    int serverPort;
 
-    Casa casas[][];
-    Jogo estado;
-
-    Socket s;
-    ObjectInputStream ois;
-    ObjectOutputStream oos;
-    boolean ligado; */
-
+public class Client extends Thread {
     
-   /**
-    * O construtor recebe o nome do servidor, ou seja, o ip e a porta.
-    * Inicia o socket e o ois, e oos como null
-    * @param serverName
-    * @param serverPort
-   */
-            
-            
-   
-     
-  /*  public Client() {
-        this.serverName = "localhost";
-        this.serverPort = 1234;
-        this.s = null;
-        this.ois = null;
-        this.oos = null;
-        this.ligado = false;
-    }*/
-
-    /**
-     * Este método "iniciar" o utilizador ao servidor
-     * @throws IOException
-    */
+    private ClientConnection conn;
     
-    /* public void iniciar() throws IOException {
-        if (!ligado) {
-            InetAddress ip = InetAddress.getByName(serverName);
-            s = new Socket(ip, serverPort);
-            ois = new ObjectInputStream(s.getInputStream());
-            oos = new ObjectOutputStream(s.getOutputStream());
-        }
-        ligado = true;
-    }
-
-    public void enviaInfo(Jogo tabuleiro) throws IOException {
-        if (ligado) {
-            System.out.println(tabuleiro);
-            oos.writeObject(tabuleiro.getTabuleiro());
-        }
-    }
-
-    public Casa[][] recebeInfo() throws IOException, ClassNotFoundException {
-        //String mensagem = null;
-        if (ligado) {
-            casas = (Casa[][]) ois.readObject();
-            System.out.println(casas);
-        }
-        return casas;
-    }*/
-
-    /**
-     * Este método desligar o utilizador do servidor
-     * @throws IOException
-     */
-   /* public void desligar() throws IOException {
-        if (ligado) {
-            s.close();
-            ois = null;
-            oos = null;
-        }
-        ligado = false;
-    }*/
-
- public static void main (String[]args) throws Exception{
-    Socket s = new Socket("192.168.1.235", 1234);
-  
-    System.out.println("conectando com" + s.getInetAddress().getHostAddress());
-    
-    DataInputStream din = new DataInputStream(s.getInputStream());
-    DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    
-    String strCli ="", strSer ="";
-    
-    while(!strCli.equals("stop")){
-        strCli = br.readLine();
-        dout.writeUTF(strCli);
-        dout.flush();
-        strSer = din.readUTF();
-    
-    System.out.println("Server: " + strSer);
-    
+    public Client(ClientConnection conn){
+        this.conn = conn;
     }
     
-    dout.close();
-    s.close();
+    @Override
+    public void run(){
+        System.out.println("Client thread running...");
+        while(true){
+            try {
+                this.sleep(60);
+            } catch (Exception ex) {
+                System.out.println("Fail: " + ex.toString());
+            }
+            try {
+                if(this.conn.getJogo().getJogadorAtual() != this.conn.getPlayerId()){
+                    if(this.conn.getFlagJogar()){
+                        // Finalizei a minha jogada e vou enviar informaçao
+                        ObjectOutputStream oos = this.conn.getObjectOutputStream();
+                        oos.writeObject(this.conn.getJogo());
+                        this.conn.setFlagJogar();   // Torna-se False porque acabei de jogar
+                        System.out.println("Estado enviado para o servidor!");
+                        oos.flush();
+                    } else{
+                        // É a vez do outro jogador jogar por isso vou esperar informaçao
+                        System.out.println("Waiting for state of other player...");
+                        Jogo j = (Jogo) this.conn.getObjectInputStream().readObject();
+                        this.conn.setJogo(j);
+                        this.conn.getController().updateWindow();
+                        this.conn.setFlagJogar();   // Torna-se Verdadeiro porque estarei a jogar
+                    }
+                }
+            } catch (Exception ex) {
+                System.out.println("Fail: " + ex.toString());
+            }
+        }
     }
-
-    
-
 }

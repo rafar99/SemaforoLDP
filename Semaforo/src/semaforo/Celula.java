@@ -34,7 +34,7 @@ public class Celula extends ImageView{ //contém info da casa
      */
     public void atualizaCelula(){
         this.elem.proximaPeca();
-        super.setImage(this.elem.getPeça().getImg());
+        super.setImage(this.elem.getPeça().loadImage());
     }
     
 }
