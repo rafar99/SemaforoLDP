@@ -93,6 +93,14 @@ public class FXMLDocumentController implements Initializable{
         int i,j;
         Casa tabuleiro[][] = this.jogo.tabuleiro.getTabuleiro();
         
+        if(client.getFlagJogar()){
+                    lb_vez.setText("É a tua vez!");
+                }
+                else {
+                    lb_vez.setText("Vez do adversário.");
+                }
+        
+        
          for(i = 0; i < 3; i++){
             for(j = 0; j < 4; j++){
                 Casa elem = tabuleiro[i][j];
@@ -149,6 +157,7 @@ public class FXMLDocumentController implements Initializable{
                 //sai do jogo e/ou mostra um alerta
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Vencedor");
+                
 
                 alert.setHeaderText(null);
 

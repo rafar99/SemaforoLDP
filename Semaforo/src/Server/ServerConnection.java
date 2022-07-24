@@ -46,7 +46,7 @@ public class ServerConnection implements Runnable {
     public void run() {
         while(true){
             try {
-                System.out.println("Esperando informaçao...");
+                System.out.println("Esperando informação...");
                 Jogo j = (Jogo) this.incoming.readObject();
                 if(j.getJogadorAtual() == 1){
                     ServerConnection pl = this.main_server.getPlayer(1);

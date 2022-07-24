@@ -8,20 +8,7 @@ and open the template in the editor.
     Author     : rafar
 */
 
-#btn_voltar {
 
-    -fx-background-color: 
-        #090a0c,
-        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-        linear-gradient(#20262b, #191d22),
-        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-background-radius: 30;
-    -fx-background-insets: 0,1,2,3,0;
-    -fx-text-fill: #fcfcfc;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-padding: 10 20 10 20;
-}
 
 
 #btn_comecar{
