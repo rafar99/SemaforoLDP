@@ -5,13 +5,17 @@
  */
 package semaforo;
 
+import Client.ClientConnection;
 import Server.Server;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,37 +36,51 @@ import javafx.stage.Stage;
  * @author rafar e rita
  */
 public class FXMLDocumentController implements Initializable{
-    
-   
-    private Jogo dados;
-    
-    @FXML
-    private GridPane gp_tabuleiro;
-    @FXML
-    private Label label;
-    @FXML
-    private Button btn_voltar;
+        
     @FXML
     private Button btn_comecar;
- 
+
     @FXML
-    private Pane p_id;
+    private Button btn_voltar;
+
     @FXML
-    private Pane p_jogo;
+    private GridPane gp_tabuleiro;
+
     @FXML
     private Label lb_bemVindo;
+
+    @FXML
+    private Label lb_player;
+    
+    @FXML
+    private Label lb_vez;
+
     @FXML
     private Pane p_começar;
+
     @FXML
-    private TextField txf_ip;
+    private Pane p_jogo;
+
+    
+    private ClientConnection client;
+    private Jogo jogo;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        novo_jogo();
-              
-    }    
+        p_começar.setVisible(true);
+        p_jogo.setVisible(false);
+    }
     
-    
+    public void setClient(ClientConnection c){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                client = c;
+                novo_jogo();
+                lb_player.setText("Player " + client.getPlayerId());
+            }
+        });
+    }
 /**
  *
  * <p>Este método inicia o estado do jogo e o tabuleiro com peças do tipo casa_vazia.
@@ -71,17 +89,16 @@ public class FXMLDocumentController implements Initializable{
  * Posto isto, chama um método do JavaFX, onMouseClick, que chama o método joga_ronde</p>
  */
     private void novo_jogo(){
-        this.dados = new Jogo();
+        this.jogo = this.client.getJogo();
         int i,j;
-        Casa tabuleiro[][] = this.dados.getTabuleiro();
+        Casa tabuleiro[][] = this.jogo.tabuleiro.getTabuleiro();
         
          for(i = 0; i < 3; i++){
             for(j = 0; j < 4; j++){
-                System.out.println(i + "," + j);
                 Casa elem = tabuleiro[i][j];
                 elem.setColumn(j);
                 elem.setIndex(i);
-                Celula cel = new Celula(elem.getPeça().getImg(), elem);
+                Celula cel = new Celula(elem.getPeça().loadImage(), elem);
                 cel.setOnMouseClicked(this::joga_ronda);
                 
                 GridPane.setRowIndex(cel, i);
@@ -102,49 +119,90 @@ public class FXMLDocumentController implements Initializable{
  * 
  */
     private void joga_ronda(MouseEvent e) {
-        Node source = (Node)e.getSource() ;
-        Integer colIndex = GridPane.getColumnIndex(source);
-        Integer rowIndex = GridPane.getRowIndex(source);
-        System.out.printf("Mouse entered cell [%d, %d]%n", rowIndex.intValue(), colIndex.intValue());
-        
-        // Verifica se pode adicionar a peça / alterar a peça
-        boolean flag_valida = this.dados.verifica_jogada(rowIndex, colIndex);
-        
-        if (flag_valida){
-            // Modifica a matriz local de 
-            
-            Celula node = (Celula) source;
-            node.atualizaCelula();
-        } else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Erro");
+        if (this.jogo.jogador_atual == this.client.getPlayerId()){
+            Node source = (Node)e.getSource() ;
+            Integer colIndex = GridPane.getColumnIndex(source);
+            Integer rowIndex = GridPane.getRowIndex(source);
+            //System.out.printf("Mouse entered cell [%d, %d]%n", rowIndex.intValue(), colIndex.intValue());
 
-            alert.setHeaderText(null);
-            alert.setContentText("Movimento Inválido! Esta casa já contém uma peça vermelha");
-            alert.showAndWait();
-            return;
-        }
-        
-        // Verifica se existe condição de vitória
-        boolean flag_vitoria = this.dados.venceuJogo();
-        if (flag_vitoria){
-            //sai do jogo e/ou mostra um alerta
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Vencedor");
+            // Verifica se pode adicionar a peça / alterar a peça
+            boolean flag_valida = this.jogo.verifica_jogada(rowIndex, colIndex);
 
-            alert.setHeaderText(null);
-            
-            alert.setContentText("Terminou o jogo!");
-            alert.showAndWait();
-            System.out.println("Ganhei");
-            p_começar.setVisible(true);
-            p_jogo.setVisible(false);
-            novo_jogo();
-            
+            if (flag_valida){
+                // Modifica a matriz local de 
+
+                Celula node = (Celula) source;
+                node.atualizaCelula();
+            } else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Erro");
+
+                alert.setHeaderText(null);
+                alert.setContentText("Movimento Inválido! Esta casa já contém uma peça vermelha");
+                alert.showAndWait();
+                return;
+            }
+
+            // Verifica se existe condição de vitória
+            boolean flag_vitoria = this.jogo.venceuJogo();
+            if (flag_vitoria){
+                //sai do jogo e/ou mostra um alerta
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Vencedor");
+
+                alert.setHeaderText(null);
+
+                alert.setContentText("Terminou o jogo!");
+                alert.showAndWait();
+                System.out.println("Ganhei");
+                p_começar.setVisible(true);
+                p_jogo.setVisible(false);
+            }
+            // Avança para o próximo jogador
+            this.jogo.avança_jogador();
+            lb_vez.setText("Vez do adversario");
         }
-        // Avança para o próximo jogador
-        //this.dados.setJogador();
     }
+    
+    public void updateWindow(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if(client.getFlagJogar()){
+                    lb_vez.setText("É a tua vez!");
+                }
+                else {
+                    lb_vez.setText("Vez do adversario.");
+                }
+                gp_tabuleiro.getChildren().clear();
+                
+                jogo = client.getJogo();
+                int i,j;
+                Casa tabuleiro[][] = jogo.tabuleiro.getTabuleiro();
+
+                 for(i = 0; i < 3; i++){
+                    for(j = 0; j < 4; j++){
+                        Casa elem = tabuleiro[i][j];
+                        elem.setColumn(j);
+                        elem.setIndex(i);
+                        Celula cel = new Celula(elem.getPeça().loadImage(), elem);
+                        cel.setOnMouseClicked(new EventHandler() {
+                            @Override
+                            public void handle(Event event) {
+                                joga_ronda((MouseEvent) event);
+                            }
+                          });
+
+                        GridPane.setRowIndex(cel, i);
+                        GridPane.setColumnIndex(cel, j);
+
+                        gp_tabuleiro.getChildren().add(cel);
+                    } 
+                }
+            }
+        });
+    }
+    
 
 
 
@@ -152,14 +210,11 @@ public class FXMLDocumentController implements Initializable{
     private void começar(MouseEvent event) throws IOException {
         p_começar.setVisible(false);
         p_jogo.setVisible(true);
-        p_id.setVisible(false);
-        //this.dados.cs.iniciar();
+        
     }
     
-    @FXML
     private void voltar(MouseEvent event){
         p_começar.setVisible(true);
         p_jogo.setVisible(true);
-        p_id.setVisible(false);
     }
 }
