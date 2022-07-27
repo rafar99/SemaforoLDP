@@ -21,7 +21,7 @@ public class Peca {
 
     /**
      *
-     * @return
+     * @return tipo
      */
     public TipoPeca getTipo() {
         return tipo;

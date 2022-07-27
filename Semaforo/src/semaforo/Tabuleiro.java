@@ -9,12 +9,15 @@ import java.io.Serializable;
 
 /**
  *
- * @author rafar
+ * @author rafare rita
  */
 public class Tabuleiro implements Serializable
 {
     Casa tabuleiro[][];
      
+    /**
+     * O construtor desta classe cria um tabuleiro preenchido com peças do tipo Casa_Vazia
+     */
     public Tabuleiro(){
          
         this.tabuleiro = new Casa[3][4];
@@ -28,6 +31,10 @@ public class Tabuleiro implements Serializable
         }
     }
     
+    /**
+     *
+     * @return this.tabuleiro
+     */
     public Casa[][] getTabuleiro(){
         return this.tabuleiro;
     }

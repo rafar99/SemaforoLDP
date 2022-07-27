@@ -23,6 +23,11 @@ public class Le {
 	// utilizador pode tentar de novo.
 	// @devolve o número lido
 
+    /**
+     *
+     * @return
+     */
+
 	public static int umInt()
 	{
   		while(true)
@@ -44,8 +49,11 @@ public class Le {
 	// utilizador pode tentar de novo.
 	// @devolve o número lido
 
-	
-	public static double umDouble()
+    /**
+     *
+     * @return
+     */
+    public static double umDouble()
 	{
   		while(true)
       	{
@@ -65,6 +73,11 @@ public class Le {
 	// válida é mostrada a mensagem "!!! Não é um float !!!" e o 
 	// utilizador pode tentar de novo.
 	// @devolve o número lido
+
+    /**
+     *
+     * @return
+     */
 
 	public static float umFloat()
 	{
@@ -88,6 +101,11 @@ public class Le {
 	// utilizador pode tentar de novo.
 	// @Devolve o carácter lido
 
+    /**
+     *
+     * @return
+     */
+
 	public static char umChar()
 	{
 		String s = "";
@@ -108,6 +126,11 @@ public class Le {
 	// Le uma String da entrada padrão. 
 	// A entrada é terminada com um return. 
 	// @devolve a String lida
+
+    /**
+     *
+     * @return
+     */
 
 	public static String umaString()
 	{

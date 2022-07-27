@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
  * @author rafar e rita
  */
 public enum TipoPeca implements Serializable {
+
     Casa_Vazia("/Images/empty.png") ,
     Verde("/Images/green.png"),
     Amarela("/Images/yellow.png"),
@@ -25,7 +26,7 @@ public enum TipoPeca implements Serializable {
     private String caminho;
     
    /**
-    * O construtor recebe uma string da imagem, inicia-a, inicia o file e a img
+    * O construtor recebe uma string da imagem como parâmetro e associa-a ao caminho
     */
     
     
@@ -33,6 +34,10 @@ public enum TipoPeca implements Serializable {
         this.caminho=img;
     }    
         
+    /**
+     *Este método faz load da imagem tendo em conta o caminho da mesma
+     * @return 
+     */
     public Image loadImage(){
         String file = this.getClass().getResource(this.caminho).toString();
         return new Image(file); 

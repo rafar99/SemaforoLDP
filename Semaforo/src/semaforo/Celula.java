@@ -30,7 +30,7 @@ public class Celula extends ImageView{ //contém info da casa
     }
     
     /**
-     * Este método atualiza a peça que está na casa, e coloca a respetiva imagem
+     * Este método atualiza a peça que está na casa, e coloca a respetiva imagem chamando o método loadImage
      */
     public void atualizaCelula(){
         this.elem.proximaPeca();

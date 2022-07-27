@@ -20,9 +20,14 @@ import semaforo.*;
  */
 public class Server {
     ServerSocket server_socket;
-    
+    /**
+     * Guarda todas os objetos/informações ligadas à conexão, ou seja, os sockets, players, inputs, outputs...
+     */
     private ArrayList<ServerConnection> players;
     
+    /**
+     *
+     */
     public Server(){
         System.out.println("Servidor em startup");
         
@@ -34,6 +39,11 @@ public class Server {
         }
     }
     
+    /**
+     *
+     * @param i
+     * @return
+     */
     public ServerConnection getPlayer(int i){
         try{
             return this.players.get(i);
@@ -42,22 +52,31 @@ public class Server {
         }
     }
     
+    /**
+     * Assim que o servidor é iniciado, executa este método. 
+     * Ou seja, o servidor fica à espera de receber as conexões dos clientes, neste caso definimos apenas dois.
+     * Cada vez que um jogador se conecta é gerado um novo servidor ligado a ele
+     */
     public void executa(){
-        System.out.println("A aceitar conexoes...");
+        System.out.println("A aceitar conexões...");
         try{
             while(this.players.size() < 2){
-                Socket socket = this.server_socket.accept();
-                ServerConnection con = new ServerConnection(socket, this, this.players.size());
+                Socket socket = this.server_socket.accept(); // Quando é feita a conexão é gerada uma nova ligação ao servidor
+                ServerConnection con = new ServerConnection(socket, this, this.players.size()); // novo servidor do jogador
                 this.players.add(con);
                 Thread th = new Thread(con);
                 th.start();
             }
             System.out.println("Servidor cheio.");
         } catch(IOException ex){
-            System.out.println("Erro ao aceitar conexao: " + ex.toString());   
+            System.out.println("Erro ao aceitar conexão: " + ex.toString());   
         }
     }
     
+    /**
+     * Cria e inicia o servidor
+     * @param args
+     */
     public static void main(String[] args){
         Server server = new Server();
         server.executa();

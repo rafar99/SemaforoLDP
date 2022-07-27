@@ -15,11 +15,16 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author rafar e rita
+ * @author rita e rafa
  */
 public class Semaforo extends Application {
         private ClientConnection client_con;
     
+    /**
+     * Este método faz uma nova conexão do cliente ao servidor. 
+     * @param cont
+     * @throws Exception
+     */
     public void conectToServer(FXMLDocumentController cont) throws Exception{
         this.client_con = new ClientConnection(cont);
     }

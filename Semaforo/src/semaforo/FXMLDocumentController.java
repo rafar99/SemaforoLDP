@@ -55,7 +55,7 @@ public class FXMLDocumentController implements Initializable{
     @FXML
     private Label lb_vez;
 
-    @FXML
+    @FXML 
     private Pane p_começar;
 
     @FXML
@@ -71,12 +71,16 @@ public class FXMLDocumentController implements Initializable{
         p_jogo.setVisible(false);
     }
     
+    /**
+     *
+     * @param c
+     */
     public void setClient(ClientConnection c){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 client = c;
-                novo_jogo();
+                estado_jogo();
                 lb_player.setText("Player " + client.getPlayerId());
             }
         });
@@ -88,7 +92,7 @@ public class FXMLDocumentController implements Initializable{
  * do TipoPeca atual e a casa.
  * Posto isto, chama um método do JavaFX, onMouseClick, que chama o método joga_ronde</p>
  */
-    private void novo_jogo(){
+    private void estado_jogo(){
         this.jogo = this.client.getJogo();
         int i,j;
         Casa tabuleiro[][] = this.jogo.tabuleiro.getTabuleiro();
@@ -151,12 +155,14 @@ public class FXMLDocumentController implements Initializable{
                 return;
             }
 
+            
             // Verifica se existe condição de vitória
             boolean flag_vitoria = this.jogo.venceuJogo();
             if (flag_vitoria){
                 //sai do jogo e/ou mostra um alerta
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Vencedor");
+               
                 
 
                 alert.setHeaderText(null);
@@ -169,10 +175,15 @@ public class FXMLDocumentController implements Initializable{
             }
             // Avança para o próximo jogador
             this.jogo.avança_jogador();
-            lb_vez.setText("Vez do adversario");
+            lb_vez.setText("Vez do adversário");
         }
     }
     
+    /**
+     * Vai atualizando a interface de acordo com as alterações feitas.
+     * Atualiza a label de vez de jogar, consoante a ativação ou não da flagJogar
+     * 
+     */
     public void updateWindow(){
         Platform.runLater(new Runnable() {
             @Override
@@ -181,9 +192,9 @@ public class FXMLDocumentController implements Initializable{
                     lb_vez.setText("É a tua vez!");
                 }
                 else {
-                    lb_vez.setText("Vez do adversario.");
+                    lb_vez.setText("Vez do adversário.");
                 }
-                gp_tabuleiro.getChildren().clear();
+               // gp_tabuleiro.getChildren().clear();
                 
                 jogo = client.getJogo();
                 int i,j;

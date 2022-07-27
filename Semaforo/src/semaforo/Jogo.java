@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author rafar
+ * @author rafar e rita
  */
 public class Jogo implements Serializable {
     
@@ -17,8 +17,7 @@ public class Jogo implements Serializable {
     int jogador_atual;
     String mensagem;
     /**
-     *O <p>construtor inicia um novo cliente recebendo o seu servername e o serverport;
-     * Inicia o tabuleiro e coloca as peças na casa vazia do array bidimensional</p>
+     *<p>O construtor cria um novo tabuleiro; inicia o jogador_atual a 0 e a mensagem com uma string vazia</p>
      */
     public Jogo() {
         this.tabuleiro = new Tabuleiro();
@@ -26,10 +25,18 @@ public class Jogo implements Serializable {
         this.mensagem = "";
     }
           
+    /**
+     *
+     * @return this.jogador_atual
+     */
     public int getJogadorAtual(){
         return this.jogador_atual;
     }
     
+    /**
+     * 
+     * @return this.mensagem
+     */
     public String getMensagem(){
         return this.mensagem;
     }
@@ -126,6 +133,9 @@ public class Jogo implements Serializable {
         return true;
     }
 
+    /**
+     * Este método permite fazer a troca da vez dos jogadores jogarem. Sabendo sempre quem é o jogador_atual
+     */
     public void avança_jogador(){
         this.jogador_atual = 1 - this.jogador_atual;
     }

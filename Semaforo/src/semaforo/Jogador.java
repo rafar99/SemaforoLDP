@@ -18,6 +18,11 @@ public class Jogador implements Serializable {
 
     
     //---------contrutor------------------------------------------ 
+
+    /**
+     *
+     * @param nome
+     */
      
      
      public Jogador(String nome) {
@@ -28,19 +33,36 @@ public class Jogador implements Serializable {
     
     
     //--------Getters e Setters-------------------------------------
+
+    /**
+     *
+     * @return jogou
+     */
     
     public boolean getJogou() {
         return jogou;
     }
 
+    /**
+     *
+     * @param jogou
+     */
     public void setJogou(boolean jogou) {
         this.jogou = jogou;
     }
 
+    /**
+     *
+     * @return nome
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     *
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }

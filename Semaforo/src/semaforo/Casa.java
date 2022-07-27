@@ -17,7 +17,7 @@ public class Casa implements Serializable {
     private int index,col;
     
     /**
-     *Construtor inicia a peca, o index e o col
+     *Construtor inicia a peca, o index e a col
      * @param p
      */
     public Casa(TipoPeca p){
@@ -52,7 +52,7 @@ public class Casa implements Serializable {
     
     /**
      *
-     * @return
+     * @return this.peca
      */
     public TipoPeca getPeça(){
         return this.peca;

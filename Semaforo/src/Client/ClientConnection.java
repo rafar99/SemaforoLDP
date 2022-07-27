@@ -25,21 +25,33 @@ public class ClientConnection {
     private boolean flag_jogar;
     private FXMLDocumentController controller;
     
+    /**
+     *
+     * @return
+     */
     public ObjectInputStream getObjectInputStream(){
         return this.ois;
     }
     
+    /**
+     *
+     * @return
+     */
     public ObjectOutputStream getObjectOutputStream() {
         return this.oos;
     }
     
-    
+    /**
+     *
+     * @param controller
+     * @throws Exception
+     */
     public ClientConnection(FXMLDocumentController controller) throws Exception{
-        this.socket = new Socket("0.0.0.0", 6666);
+        this.socket = new Socket("127.0.0.1", 6666);
         this.controller = controller;
         this.flag_jogar = false;
   
-        System.out.println("conectando com " + this.socket.getInetAddress().getHostAddress());
+        System.out.println("Conectando com " + this.socket.getInetAddress().getHostAddress());
 
         this.oos = new ObjectOutputStream(this.socket.getOutputStream());
         this.ois = new ObjectInputStream(this.socket.getInputStream());
@@ -61,26 +73,49 @@ public class ClientConnection {
         this.thread.start();
     }
     
+    /**
+     *
+     * @return
+     */
     public int getPlayerId(){
         return this.player_id;
     }
     
+    /**
+     *
+     * @return
+     */
     public Jogo getJogo(){
         return this.jogo;
     }
 
+    /**
+     *
+     * @param j
+     */
     public void setJogo(Jogo j) {
         this.jogo = j;
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean getFlagJogar(){
         return this.flag_jogar;
     }
     
+    /**
+     *
+     */
     public void setFlagJogar(){
         this.flag_jogar = !this.flag_jogar; 
     }
     
+    /**
+     *
+     * @return
+     */
     public FXMLDocumentController getController(){
         return this.controller;
     }
